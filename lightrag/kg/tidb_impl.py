@@ -102,7 +102,7 @@ class TiDB:
                 sanitized_params = sanitize_sensitive_info(params)
                 sanitized_error = sanitize_sensitive_info({"error": str(e)})
                 logger.error(
-                    f"Tidb database,\nsql:{sql},\nparams:{sanitized_params},\nerror:{sanitized_error}"
+                    f"Tidb database error occurred while executing SQL query. Please check the logs for more details."
                 )
                 raise
             if multirows:
