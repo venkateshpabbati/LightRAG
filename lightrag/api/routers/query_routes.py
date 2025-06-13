@@ -191,7 +191,8 @@ def create_query_routes(rag, api_key: Optional[str] = None, top_k: int = 60):
                                 yield f"{json.dumps({'response': chunk})}\n"
                     except Exception as e:
                         logging.error(f"Streaming error: {str(e)}")
-                        yield f"{json.dumps({'error': str(e)})}\n"
+                        trace_exception(e)
+                        yield f"{json.dumps({'error': 'An internal error occurred'})}\n"
 
             return StreamingResponse(
                 stream_generator(),
@@ -205,6 +206,6 @@ def create_query_routes(rag, api_key: Optional[str] = None, top_k: int = 60):
             )
         except Exception as e:
             trace_exception(e)
-            raise HTTPException(status_code=500, detail=str(e))
+            raise HTTPException(status_code=500, detail="An internal error occurred")
 
     return router
