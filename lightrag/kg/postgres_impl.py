@@ -79,7 +79,7 @@ class PostgreSQLDB:
             )
         except Exception as e:
             logger.error(
-                f"PostgreSQL, Failed to connect database at {self.host}:{self.port}/{self.database}, Got:{e}"
+                f"PostgreSQL, Failed to connect to the database. Error: {e}"
             )
             raise
 
